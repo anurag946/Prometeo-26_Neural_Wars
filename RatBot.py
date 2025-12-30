@@ -5,11 +5,6 @@ from config import *
 from board import Board
 
 class RatBot:
-    """
-    class for an AI player. Defines the common interface that all AI
-    implementations must follow.
-    Follow the naming convention shared before submission!!!
-    """
     def __init__(self, board):
         self.board = board
         self.nodes_expanded = 0
@@ -18,8 +13,8 @@ class RatBot:
     def get_best_move(self):
         legal_moves = self.board.get_legal_moves()
 
-        if not legal moves:
-            return []
+        if not legal_moves:
+            return None
 
         best_score = -10**9
         best_moves = []
@@ -28,12 +23,13 @@ class RatBot:
             self.board.make_move(move)
 
         score = self.evaluate_board()
+        
         self.board.undo_move()
 
-        if (score > best_score):
+        if score > best_score:
             best_score = score
             best_moves = [move]
-        elif (score == best_score):
+        elif score == best_score:
             best_moves.append(move)
 
         return random.choice(best_moves)
@@ -46,7 +42,7 @@ class RatBot:
             'K': 1000
         }
 
-score = 0
+        score = 0
 
 for row in self.board.board:
     for piece in row:
